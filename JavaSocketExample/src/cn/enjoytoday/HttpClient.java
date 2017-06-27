@@ -43,13 +43,16 @@ public class HttpClient {
 			
 			OutputStream outputStream=socket.getOutputStream();
 			outputStream.write(stringBuffer.toString().getBytes());
+//			outputStream.write("EOF\n".getBytes());
+//			outputStream.flush();
 			Thread.sleep(2000);
+
 			InputStream inputStream=socket.getInputStream();
 			int size=inputStream.available();
 			byte[] buffer=new byte[size];
 			inputStream.read(buffer);
 			System.out.println("get reqeust string:"+new String(buffer));
-		} catch (IOException | InterruptedException e) {
+		} catch (Exception  e) {
 			e.printStackTrace();
 		}finally {
 			try {
@@ -61,9 +64,6 @@ public class HttpClient {
 				e.printStackTrace();
 			}
 		}
-		
-		
-		
 		
 	}
 }
