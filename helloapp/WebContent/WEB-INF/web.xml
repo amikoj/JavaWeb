@@ -15,6 +15,11 @@
         <welcome-file>default.htm</welcome-file>  
         <welcome-file>default.jsp</welcome-file>  
     </welcome-file-list>
+    
+<context-param>
+    <param-name>key</param-name>
+    <param-value>value</param-value>
+</context-param>
 
 <servlet>
   <servlet-name>dispatcher</servlet-name>
@@ -25,6 +30,7 @@
    <servlet-name>dispatcher</servlet-name>
    <url-pattern>/dispatcher</url-pattern>
 </servlet-mapping>
+
 
 
 </web-app>

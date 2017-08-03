@@ -9,7 +9,7 @@ public class HelloTag extends TagSupport {
 	@Override
 	public int doEndTag() throws JspException {
 		try {
-			pageContext.getOut().print("Hello");
+			pageContext.getOut().print("TestTag");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
