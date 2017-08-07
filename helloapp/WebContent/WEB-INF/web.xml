@@ -8,15 +8,28 @@
 
 <!--设置web-app默认主页 -->
   <welcome-file-list>  
-       <welcome-file>index</welcome-file>
-        <welcome-file>login.html</welcome-file>  
-        <welcome-file>index.htm</welcome-file>  
-        <welcome-file>index.jsp</welcome-file>  
-        <welcome-file>default.html</welcome-file>  
-        <welcome-file>default.htm</welcome-file>  
-        <welcome-file>default.jsp</welcome-file>  
+       <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     
+    
+   <servlet>
+     <servlet-name>basicServlet</servlet-name>
+     <servlet-class>mypack.BasicServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+   <servlet-name>basicServlet</servlet-name>
+   <url-pattern>/</url-pattern>
+</servlet-mapping>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <!--   
 <context-param>
     <param-name>key</param-name>
     <param-value>value</param-value>
@@ -26,15 +39,10 @@
   <servlet-name>dispatcher</servlet-name>
   <servlet-class>mypack.DispatcherServlet</servlet-class>
 </servlet>
-
-
 <servlet>
      <servlet-name>basicServlet</servlet-name>
      <servlet-class>mypack.BasicServlet</servlet-class>
 </servlet>
-
-
-
 <servlet-mapping>
    <servlet-name>basicServlet</servlet-name>
    <url-pattern>/index</url-pattern>
@@ -44,7 +52,7 @@
    <servlet-name>dispatcher</servlet-name>
    <url-pattern>/dispatcher</url-pattern>
 </servlet-mapping>
-
+ -->
 
 
 </web-app>
