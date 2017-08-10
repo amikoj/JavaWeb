@@ -22,6 +22,13 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Servlet_one extends HttpServlet {
 	
+	@Override
+	public void init() throws ServletException {
+		super.init();
+		System.out.println("servlet_one init.");
+		getServletContext().setAttribute("init-context", this);
+	}
+	
 	
 	/**
 	 * get方法回调
@@ -29,9 +36,10 @@ public class Servlet_one extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("doGet,and request url:"+req.getRemoteAddr());
-        getInitParmas();
+//		System.out.println("doGet,and request url:"+req.getRemoteAddr());
+
         readString(req.getReader());
+        getInitParmas();
     	response(resp.getWriter(), "Servlet_one doGet");
 		
 	}
@@ -71,7 +79,6 @@ public class Servlet_one extends HttpServlet {
 
 		String line=null;
 		StringBuffer stringBuffer=new StringBuffer();
-		System.out.println("one line:"+bufferedReader.readLine());
 		while( (line=bufferedReader.readLine())!=null) {
 			stringBuffer.append(line+"\n");
 		}

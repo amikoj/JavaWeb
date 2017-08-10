@@ -33,4 +33,44 @@
 	
 	
 	
+	<servlet>
+	  <servlet-name>two</servlet-name>
+	  <servlet-class>cn.enjoytoday.Servlet_two</servlet-class>
+	  
+	  <!--  初始化参数 -->
+	  <init-param>
+	          <param-name>info</param-name>
+	          <param-value>basic httpServlet demo.</param-value>
+	  </init-param>
+	  <!-- servlet加载启动设置，当其大于等于0时表示应用启动时加载，否则则表示访问时加载，初始加载时的数值设置越小加载优先级越高. -->
+	  <load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+	  <servlet-name>two</servlet-name>
+	  <url-pattern>/two</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	</web-app>
