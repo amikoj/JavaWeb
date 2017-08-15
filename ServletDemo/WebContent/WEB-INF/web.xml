@@ -53,11 +53,16 @@
 	
 	
 	
+	<servlet>
+	   <servlet-name>test</servlet-name>
+	   <servlet-class>cn.enjoytoday.ServletDemo</servlet-class>
+	</servlet>
 	
-	
-	
-	
-	
+
+	<servlet-mapping>
+	      <servlet-name>test</servlet-name>
+	      <url-pattern>/test</url-pattern>
+	</servlet-mapping>
 	
 	
 	
