@@ -1,12 +1,19 @@
 package cn.enjoytoday;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.Iterator;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,9 +24,24 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.tomcat.util.http.fileupload.UploadContext;
 
+import com.sun.image.codec.jpeg.JPEGCodec;
+import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import com.sun.prism.Graphics;
+import com.sun.prism.paint.Gradient;
 import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class ServletDemo extends HttpServlet {
+	
+	
+	
+	@Override
+	public void init() throws ServletException {
+	
+	    
+	    
+	    
+	    
+	}
 	
 	
 	/**
@@ -36,6 +58,18 @@ public class ServletDemo extends HttpServlet {
 	 * 文件下载请求
 	 */
 	private final String UPLOAD_URL="/upload";
+	
+	/**
+	 * create image.
+	 */
+	private final String CREATE_IMAGE="/image";
+	
+	
+
+	private final String COOKIE="/cookie";
+	
+	
+	private final String DIR="/dir";
 	
 	
 	
@@ -58,6 +92,12 @@ public class ServletDemo extends HttpServlet {
 			download(req,resp);
 		}else if(requestUrl.startsWith(UPLOAD_URL)){
 			upload(req, resp);
+		}else if (requestUrl.startsWith(CREATE_IMAGE)) {
+			createImage(req, resp);
+		}else if (requestUrl.startsWith(COOKIE)) {
+			handlerCookie(req,resp);
+		}else if (requestUrl.startsWith(DIR)) {
+			parseContext(req, resp);	
 		}
 		
 		
@@ -65,6 +105,142 @@ public class ServletDemo extends HttpServlet {
 	
 	
 	
+	
+	private void handlerCookie(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		Cookie[] cookies=request.getCookies();
+		
+		Cookie c=null;
+		OutputStream outputStream=response.getOutputStream();
+		if (cookies==null || cookies.length==0)  {
+			outputStream.write("no cookie get".getBytes());
+	
+		}else {
+			for (Cookie cookie:cookies){
+				outputStream.write(("\r\ncookie name:"+cookie.getName()).getBytes());
+				outputStream.write(("\r\ncookie value:"+cookie.getValue()).getBytes());
+				outputStream.write(("\r\ncookie path:"+cookie.getPath()).getBytes());
+				outputStream.write(("\r\ncookie max age::"+cookie.getMaxAge()).getBytes());
+				if (cookie.getName().trim().equals("username")) {
+					c=cookie;
+				}
+			}
+			if (c==null) {
+				c=new Cookie("username", "cai");
+				c.setMaxAge(60*60);
+			}else if (c.getValue().equals("cai")) {
+				System.out.println("c is cai");
+				c.setValue("hfcai");
+			}else if (c.getValue().equals("hfcai")) {
+				c.setMaxAge(0);
+			}
+			response.addCookie(c);
+			
+		}
+		
+//		response.addCookie(new Cookie("cookie", "cookie_value"));
+		outputStream.flush();
+		outputStream.close();
+	}
+	
+	
+	
+	
+	
+	private void parseContext(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		
+		PrintWriter printWriter=response.getWriter();
+		
+    ServletContext context=getServletContext();
+	    
+	    if (context!=null) {
+	    	Enumeration<String> attributes= context.getAttributeNames();
+	    	
+	    	if (attributes!=null ) {
+	    		while (attributes.hasMoreElements()) {
+					String name = (String) attributes.nextElement();
+					printWriter.append("attribute name is:"+name+"\n");
+					printWriter.append("attribute value is:"+context.getAttribute(name)+"\n");
+					printWriter.append("\n\n\n");
+	    		}
+	    		
+	    		Enumeration<String> paramters=context.getInitParameterNames();
+	    		if (paramters!=null) {
+	    			while (paramters.hasMoreElements()) {
+						String name = (String) paramters.nextElement();
+						printWriter.append("parmas name is:"+name+"\n");
+						printWriter.append("paeams value is:"+context.getInitParameter(name)+"\n");
+						printWriter.append("\n\n\n");
+		    		}
+				}
+	    		
+	    	printWriter.flush();
+	    	printWriter.close();
+				
+			}
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
+			
+		}
+	    
+	}
+	
+	
+	/**
+	 * 动态图片
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	private void createImage(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String name=request.getParameter("name");
+		if (name==null|| name.trim().length()==0) {
+			try {
+				response.sendRedirect(getServletName()+"/test");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
+		}
+		
+		
+		response.setContentType("image/jpeg");
+		int length=name.trim().length();
+		int unit_w=20;
+		int unit_h=50;
+		
+		BufferedImage image=new BufferedImage(length*unit_w, unit_h, BufferedImage.TYPE_INT_RGB);
+		
+		
+		java.awt.Graphics graphics=image.getGraphics();
+		graphics.setColor(Color.BLUE);
+		graphics.fill3DRect(0, 0, unit_w*length, unit_h, false);
+	
+		Font font=new Font("Courier", Font.BOLD, 18);
+		graphics.setFont(font);
+		graphics.setColor(Color.white);
+		
+		for (int i = 0; i < name.length(); i++) {
+			graphics.drawString(name.charAt(i)+"", unit_w*i+5, unit_h-8);
+			
+		}
+		
+		
+		JPEGImageEncoder encoder=JPEGCodec.createJPEGEncoder(response.getOutputStream());
+		encoder.encode(image);
+		response.getOutputStream().flush();
+		response.getOutputStream().close();
+		
+		
+		
+		
+		
+	
+	}
 	
 	/**
 	 * 首页请求
