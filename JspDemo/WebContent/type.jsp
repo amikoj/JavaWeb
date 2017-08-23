@@ -8,12 +8,12 @@
 </head>
 <body>
 
-<a href="/JspDemo/content.jsp?tag=page">page指令</a><br>
-<a href="/JspDemo/content.jsp?tag=include">include指令</a><br>
-<a href="/JspDemo/content.jsp?tag=declare">jsp声明</a><br>
-<a href="/JspDemo/content.jsp?tag=scriptlet">java程序片段</a><br>
-<a href="/JspDemo/content.jsp?tag=expression">java 表达式</a><br>
-<a href="/JspDemo/content.jsp?tag=implied">java 隐含对象</a><br>
+
+<a href="/JspDemo/content.jsp?tag=jsp" target="showframe">JSP 指令</a><br>
+<a href="/JspDemo/content.jsp?tag=declare" target="showframe">JSP 声明</a><br>
+<a href="/JspDemo/content.jsp?tag=scriptlet" target="showframe"s>JAVA 程序片段</a><br>
+<a href="/JspDemo/content.jsp?tag=expression" target="showframe">JAVA 表达式</a><br>
+<a href="/JspDemo/content.jsp?tag=implied" target="showframe">JAVA 隐含对象</a><br>
 
 </body>
 </html>

@@ -3,29 +3,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Jsp标签 </title>
 </head>
 
-
-Hello world:<%= request.getParameter("name") %>
-
-      <div align="center"  color=“blue”> 
-      
-     <t1><b>   <font color="blue"  size="4"  face="verdana"  >Jsp标签 </font></b> </t1>
-     
-     
-   <frameset cols="120,*">
+    
+  <frameset rows="15%,*">
+     <frame src="/JspDemo/head.jsp">
+      <frameset cols="150,*">
       <frame src="/JspDemo/type.jsp"/> 
-      <frame src="/JspDemo/content.jsp?tag=page" name="showframe"/> 
- <noframes>
+      <frame src="/JspDemo/content.jsp?tag=jsp" name="showframe"/> 
+      </frameset>
+       <noframes>
          <body>
-        <p>对不起，您的浏览器不支持“框架”！</p>
-        
+        <p>对不起，您的浏览器不支持“框架”！</p> 
         </body>
 </noframes>
 
   </frameset>
-     
-</div>
 
 </html>
