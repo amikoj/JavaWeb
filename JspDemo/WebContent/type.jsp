@@ -15,5 +15,7 @@
 <a href="/JspDemo/content.jsp?tag=expression" target="showframe">JAVA 表达式</a><br>
 <a href="/JspDemo/content.jsp?tag=implied" target="showframe">JAVA 隐含对象</a><br>
 
+<a href="/JspDemo/content.jsp?tag=cycle" target="showframe">JSP 周期</a><br>
+
 </body>
 </html>
