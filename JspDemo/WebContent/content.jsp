@@ -331,7 +331,7 @@ JSP 声明比较简单，主要是用于对于当前jsp映射的访问的servlet
 
 </pre>
 <p>如下为一些常见的Jsp标签:</p><br/>
-<li> forward </li><br/>
+<h5> forward </h5>
    <p> 为请求转发标签，格式为:</p>
    <pre style="background:#eeeeee;color:#00008b"> 
      
